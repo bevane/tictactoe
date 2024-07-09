@@ -47,4 +47,14 @@ function GameBoard() {
   return { board, printBoard, addToken, clearBoard }
 }
 
+
+function Player(name, token) {
+  let score = 0;
+
+  const increaseScore = () => ++score;
+  const getScore = () => score;
+
+  return { name, token, increaseScore, getScore }
+}
+
 const gameboard = GameBoard();
