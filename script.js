@@ -33,7 +33,16 @@ function GameBoard() {
     return
   }
 
-  return { board, printBoard, addToken }
+  function clearBoard() {
+    for (let i = 0; i < 3; i++) {
+      board.push([]);
+      for (j = 0; j < 3; j++) {
+        board[i][j] = " ";
+      }
+    }
+  }
+
+  return { board, printBoard, addToken, clearBoard }
 }
 
 const gameboard = GameBoard();
