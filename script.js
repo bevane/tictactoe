@@ -28,7 +28,7 @@ function GameBoard() {
   }
 
   function addToken(token, i, j) {
-    if (board[i][j] === " ") {
+    if (board[i][j] != " ") {
       return console.log(`${i},${j} is not empty!`);
     }
     board[i][j] = token;
