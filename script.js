@@ -18,9 +18,11 @@ function GameBoard() {
           boardStr += "|";
         }
       }
-      boardStr += "\n";
-      boardStr += "_ _ _";
-      boardStr += "\n";
+      if (i < board.length - 1) {
+        boardStr += "\n";
+        boardStr += "_ _ _";
+        boardStr += "\n";
+      }
     }
     console.log(boardStr);
   }
