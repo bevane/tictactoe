@@ -57,4 +57,15 @@ function Player(name, token) {
   return { name, token, increaseScore, getScore }
 }
 
+
+const game = (function Game() {
+  player1Name = prompt("Player 1 name: ");
+  const player1 = Player(player1Name, "x");
+  console.log(`${player1.name} has joined the game and will be playing ${player1.token}`);
+  player2Name = prompt("Player 2 name: ");
+  const player2 = Player(player2Name, "o");
+  console.log(`${player2.name} has joined the game and will be playing ${player2.token}`);
+
+})();
+
 const gameboard = GameBoard();
