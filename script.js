@@ -5,7 +5,7 @@ function GameBoard() {
   for (let i = 0; i < 3; i++) {
     board.push([]);
     for (j = 0; j < 3; j++) {
-      board[i].push([" "]);
+      board[i].push(" ");
     }
   }
 
