@@ -64,7 +64,16 @@ const game = (function Game() {
   console.log(`${player1.name} has joined the game and will be playing ${player1.token}`);
   player2Name = prompt("Player 2 name: ");
   const player2 = Player(player2Name, "o");
-  console.log(`${player2.name} has joined the game and will be playing ${player2.token}`);
+  console.log(`${player2.name} has joined the game an will be playing ${player2.token}`);
+
+  function playTurn(player) {
+    console.log(`It is now ${player.name}'s turn`);
+    let [i, j] = prompt("Type position to place your marker: ").split(",");
+    console.log(`${i}, ${j}`);
+    gameboard.addToken(player.token, i, j);
+  }
+
+  return { player1, player2, playTurn }
 
 })();
 
