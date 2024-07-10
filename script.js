@@ -44,7 +44,30 @@ function GameBoard() {
     }
   }
 
-  return { board, printBoard, addToken, clearBoard }
+  function checkWinCondition(token, i, j) {
+    // checks if a token position satisfies a win condition
+    const winArrangement = [token, token, token];
+    const tokenRow = board[i];
+    const tokenColumn = (() => {
+      const col = []
+      for (let k = 0; k < board.length; k++) {
+        col.push(board[k][j]);
+      }
+      return col;
+    })();
+    const tokenDiagonal1 = [board[0][0], board[1][1], board[2][2]]
+    const tokenDiagonal2 = [board[0][2], board[1][1], board[2][0]]
+
+    if (
+      arrayIsEqual(tokenRow, winArrangement) ||
+      arrayIsEqual(tokenColumn, winArrangement) ||
+      arrayIsEqual(tokenDiagonal1, winArrangement) ||
+      arrayIsEqual(tokenDiagonal2, winArrangement)
+    ) return true
+    return false
+  }
+
+  return { board, printBoard, addToken, clearBoard, checkWinCondition }
 }
 
 
@@ -73,8 +96,14 @@ const game = (function Game() {
     gameboard.addToken(player.token, i, j);
   }
 
+
+
   return { player1, player2, playTurn }
 
 })();
+
+function arrayIsEqual(array1, array2) {
+  return array1.toString() === array2.toString()
+}
 
 const gameboard = GameBoard();
