@@ -120,8 +120,28 @@ const game = (function Game() {
     return "tie"
   }
 
+  function playGame() {
+    let startingPlayer = player1;
+    for (let i = 0; i < 3; i++) {
+      console.log(`ROUND ${i + 1} OF 3`)
+      let winningPlayer = playRound(startingPlayer)
+      if (winningPlayer === player1) player1.increaseScore();
+      else if (winningPlayer === player2) player2.increaseScore();
+      console.log(`${winningPlayer.name} won round ${i + 1}. Score: ${player1.getScore()} - ${player2.getScore()}`);
+      gameboard.clearBoard();
+      startingPlayer = startingPlayer === player1 ? player2 : player1;
+    }
+    if (player1.getScore() > player2.getScore()) {
+      console.log(`${player1.name} has won the game with a score of ${player1.getScore()} - ${player2.getScore()}`);
+    }
+    else if (player2.getScore() > player1.getScore()) {
+      console.log(`${player2.name} has won the game with a score of ${player2.getScore()} - ${player1.getScore()}`);
+    }
+    else console.log(`The game is a tie!`);
+  }
 
-  return { player1, player2, playTurn, playRound }
+
+  return { player1, player2, playTurn, playRound, playGame }
 
 })();
 
