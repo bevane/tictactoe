@@ -103,11 +103,25 @@ const game = (function Game() {
     let [i, j] = prompt("Type position to place your marker: ").split(",");
     console.log(`${i}, ${j}`);
     gameboard.addToken(player.token, i, j);
+    return gameboard.checkWinCondition(player.token, i, j);
+  }
+
+  function playRound(startingPlayer) {
+    let currentPlayer = startingPlayer;
+    gameboard.printBoard();
+    while (gameboard.checkFullBoard() === false) {
+      let currentPlayerWon = playTurn(currentPlayer)
+      gameboard.printBoard();
+      if (currentPlayerWon) {
+        return currentPlayer;
+      }
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
+    }
+    return "tie"
   }
 
 
-
-  return { player1, player2, playTurn }
+  return { player1, player2, playTurn, playRound }
 
 })();
 
