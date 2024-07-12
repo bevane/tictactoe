@@ -144,8 +144,32 @@ const game = (function Game() {
 
 })();
 
+
 function arrayIsEqual(array1, array2) {
   return array1.toString() === array2.toString()
 }
 
+
+const ui = (function DOMcontroller() {
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => {
+    cell.addEventListener("click", () => {
+    })
+  })
+
+
+  function updateScreen() {
+    for (let i = 0; i < gameboard.board.length; i++) {
+      for (let j = 0; j < gameboard.board[i].length; j++) {
+        let cell = document.getElementById(`${i}-${j}`);
+        cell.innerText = gameboard.board[i][j]
+      }
+
+    }
+  }
+
+  return { updateScreen }
+})();
+
 const gameboard = GameBoard();
+
