@@ -1,0 +1,20 @@
+h1 {
+  text-align: center;
+}
+
+.gameboard {
+  background-color: black;
+  width: 300px;
+  height: 300px;
+  margin: 100px auto;
+  display: grid;
+  gap: 5px;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+}
+
+.cell {
+  background-color: white;
+  border: none;
+}
+
+
