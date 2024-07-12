@@ -97,51 +97,25 @@ const game = (function Game() {
   const player2 = Player(player2Name, "o");
   console.log(`${player2.name} has joined the game an will be playing ${player2.token}`);
 
-  function playTurn(player) {
-    console.log(`It is now ${player.name}'s turn`);
-    let [i, j] = prompt("Type position to place your marker: ").split(",");
-    console.log(`${i}, ${j}`);
-    gameboard.addToken(player.token, i, j);
-    return gameboard.checkWinCondition(player.token, i, j);
-  }
+  let currentPlayer = player1;
 
-  function playRound(startingPlayer) {
-    let currentPlayer = startingPlayer;
-    gameboard.printBoard();
-    while (gameboard.checkFullBoard() === false) {
-      let currentPlayerWon = playTurn(currentPlayer)
-      gameboard.printBoard();
-      if (currentPlayerWon) {
-        return currentPlayer;
-      }
-      currentPlayer = currentPlayer === player1 ? player2 : player1;
-    }
-    return "tie"
-  }
-
-  function playGame() {
-    let startingPlayer = player1;
-    for (let i = 0; i < 3; i++) {
-      console.log(`ROUND ${i + 1} OF 3`)
-      let winningPlayer = playRound(startingPlayer)
-      if (winningPlayer === player1) player1.increaseScore();
-      else if (winningPlayer === player2) player2.increaseScore();
-      console.log(`${winningPlayer.name} won round ${i + 1}. Score: ${player1.getScore()} - ${player2.getScore()}`);
+  function playTurn(i, j) {
+    gameboard.addToken(currentPlayer.token, i, j);
+    let win = gameboard.checkWinCondition(currentPlayer.token, i, j);
+    let fullBoard = gameboard.checkFullBoard()
+    if (fullBoard) {
+      console.log("tie")
       gameboard.clearBoard();
-      startingPlayer = startingPlayer === player1 ? player2 : player1;
     }
-    if (player1.getScore() > player2.getScore()) {
-      console.log(`${player1.name} has won the game with a score of ${player1.getScore()} - ${player2.getScore()}`);
+    if (win) {
+      console.log(`${currentPlayer.name} wins`);
+      gameboard.clearBoard();
     }
-    else if (player2.getScore() > player1.getScore()) {
-      console.log(`${player2.name} has won the game with a score of ${player2.getScore()} - ${player1.getScore()}`);
-    }
-    else console.log(`The game is a tie!`);
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+    ui.updateScreen();
+
   }
-
-
-  return { player1, player2, playTurn, playRound, playGame }
-
+  return { player1, player2, playTurn, currentPlayer }
 })();
 
 
@@ -154,6 +128,8 @@ const ui = (function DOMcontroller() {
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
     cell.addEventListener("click", () => {
+      [i, j] = cell.id.split("-");
+      game.playTurn(i, j);
     })
   })
 
