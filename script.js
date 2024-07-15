@@ -29,10 +29,11 @@ function GameBoard() {
 
   function addToken(token, i, j) {
     if (board[i][j] != " ") {
-      return console.log(`${i},${j} is not empty!`);
+      // spot is not empty
+      return false
     }
     board[i][j] = token;
-    return
+    return true
   }
 
   function clearBoard() {
@@ -100,7 +101,8 @@ const game = (function Game() {
   let currentPlayer = player1;
 
   function playTurn(i, j) {
-    gameboard.addToken(currentPlayer.token, i, j);
+    const addedSuccesfully = gameboard.addToken(currentPlayer.token, i, j);
+    if (!addedSuccesfully) return
     let win = gameboard.checkWinCondition(currentPlayer.token, i, j);
     let fullBoard = gameboard.checkFullBoard()
     if (fullBoard) {
