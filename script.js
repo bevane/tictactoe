@@ -90,7 +90,7 @@ function Player(name, token) {
 }
 
 
-const game = (function Game() {
+function Game() {
   player1Name = prompt("Player 1 name: ");
   const player1 = Player(player1Name, "x");
   console.log(`${player1.name} has joined the game and will be playing ${player1.token}`);
@@ -118,7 +118,7 @@ const game = (function Game() {
 
   }
   return { player1, player2, playTurn, currentPlayer }
-})();
+};
 
 
 function arrayIsEqual(array1, array2) {
@@ -127,6 +127,12 @@ function arrayIsEqual(array1, array2) {
 
 
 const ui = (function DOMcontroller() {
+  let game;
+  const startButton = document.querySelector(".start");
+  startButton.addEventListener("click", () => {
+    game = Game();
+  })
+
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
     cell.addEventListener("click", () => {
@@ -134,7 +140,6 @@ const ui = (function DOMcontroller() {
       game.playTurn(i, j);
     })
   })
-
 
   function updateScreen() {
     for (let i = 0; i < gameboard.board.length; i++) {
