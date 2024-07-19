@@ -77,7 +77,7 @@ function GameBoard() {
   }
 
   return { board, printBoard, addToken, clearBoard, checkWinCondition, checkFullBoard }
-}
+};
 
 
 function Player(name, token) {
@@ -87,7 +87,7 @@ function Player(name, token) {
   const getScore = () => score;
 
   return { name, token, increaseScore, getScore }
-}
+};
 
 
 function Game() {
