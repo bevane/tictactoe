@@ -103,6 +103,8 @@ const game = (function Game() {
     player2 = Player(player2Name, "o");
     console.log(`${player2.name} has joined the game an will be playing ${player2.token}`);
     currentPlayer = player1;
+    gameboard.clearBoard();
+    ui.updateScreen();
   }
 
 
