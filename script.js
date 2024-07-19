@@ -96,12 +96,10 @@ const game = (function Game() {
   let currentPlayer
 
   function start() {
-    let player1Name = prompt("Player 1 name: ");
+    let player1Name = document.querySelector("#player1-name").value;
     player1 = Player(player1Name, "x");
-    console.log(`${player1.name} has joined the game and will be playing ${player1.token}`);
-    let player2Name = prompt("Player 2 name: ");
+    let player2Name = document.querySelector("#player2-name").value;
     player2 = Player(player2Name, "o");
-    console.log(`${player2.name} has joined the game an will be playing ${player2.token}`);
     currentPlayer = player1;
     gameboard.clearBoard();
     ui.updateScreen();

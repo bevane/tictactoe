@@ -1,6 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
 .start {
@@ -9,13 +10,14 @@ body {
 
 h1 {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .gameboard {
   background-color: black;
   width: 300px;
   height: 300px;
-  margin: 100px auto;
+  margin: 20px auto;
   display: grid;
   gap: 5px;
   grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
@@ -25,6 +27,14 @@ h1 {
   background-color: white;
   border: none;
   font-size: 48px;
+}
+
+.name-form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 200px;
 }
 
 
