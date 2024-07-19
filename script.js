@@ -94,11 +94,17 @@ const game = (function Game() {
   let player1
   let player2
   let currentPlayer
+  let gameOngoing
 
   function start() {
+    gameboard.clearBoard();
+    document.querySelector(".scoreboard").innerText = "";
+    gameOngoing = true;
     let player1Name = document.querySelector("#player1-name").value;
+    if (!player1Name) player1Name = "Player 1";
     player1 = Player(player1Name, "x");
     let player2Name = document.querySelector("#player2-name").value;
+    if (!player2Name) player2Name = "Player 2";
     player2 = Player(player2Name, "o");
     currentPlayer = player1;
     gameboard.clearBoard();
@@ -107,17 +113,18 @@ const game = (function Game() {
 
 
   function playTurn(i, j) {
+    if (!gameOngoing) return
     const addedSuccesfully = gameboard.addToken(currentPlayer.token, i, j);
     if (!addedSuccesfully) return
     let win = gameboard.checkWinCondition(currentPlayer.token, i, j);
     let fullBoard = gameboard.checkFullBoard()
     if (fullBoard) {
-      document.querySelector(".scoreboard").innerText = "It's a tie!"
-      gameboard.clearBoard();
+      gameOngoing = false;
+      document.querySelector(".scoreboard").innerText = "It's a tie!";
     }
     if (win) {
-      document.querySelector(".scoreboard").innerText = `${currentPlayer.name} won the game!`
-      gameboard.clearBoard();
+      gameOngoing = false;
+      document.querySelector(".scoreboard").innerText = `${currentPlayer.name} won the game!`;
     }
     currentPlayer = currentPlayer === player1 ? player2 : player1;
     ui.updateScreen();
