@@ -112,11 +112,11 @@ const game = (function Game() {
     let win = gameboard.checkWinCondition(currentPlayer.token, i, j);
     let fullBoard = gameboard.checkFullBoard()
     if (fullBoard) {
-      console.log("tie")
+      document.querySelector(".scoreboard").innerText = "It's a tie!"
       gameboard.clearBoard();
     }
     if (win) {
-      console.log(`${currentPlayer.name} wins`);
+      document.querySelector(".scoreboard").innerText = `${currentPlayer.name} won the game!`
       gameboard.clearBoard();
     }
     currentPlayer = currentPlayer === player1 ? player2 : player1;
