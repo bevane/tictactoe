@@ -90,15 +90,21 @@ function Player(name, token) {
 };
 
 
-function Game() {
-  player1Name = prompt("Player 1 name: ");
-  const player1 = Player(player1Name, "x");
-  console.log(`${player1.name} has joined the game and will be playing ${player1.token}`);
-  player2Name = prompt("Player 2 name: ");
-  const player2 = Player(player2Name, "o");
-  console.log(`${player2.name} has joined the game an will be playing ${player2.token}`);
+const game = (function Game() {
+  let player1
+  let player2
+  let currentPlayer
 
-  let currentPlayer = player1;
+  function start() {
+    let player1Name = prompt("Player 1 name: ");
+    player1 = Player(player1Name, "x");
+    console.log(`${player1.name} has joined the game and will be playing ${player1.token}`);
+    let player2Name = prompt("Player 2 name: ");
+    player2 = Player(player2Name, "o");
+    console.log(`${player2.name} has joined the game an will be playing ${player2.token}`);
+    currentPlayer = player1;
+  }
+
 
   function playTurn(i, j) {
     const addedSuccesfully = gameboard.addToken(currentPlayer.token, i, j);
@@ -117,8 +123,8 @@ function Game() {
     ui.updateScreen();
 
   }
-  return { player1, player2, playTurn, currentPlayer }
-};
+  return { player1, player2, playTurn, currentPlayer, start }
+})();
 
 
 function arrayIsEqual(array1, array2) {
@@ -127,10 +133,9 @@ function arrayIsEqual(array1, array2) {
 
 
 const ui = (function DOMcontroller() {
-  let game;
   const startButton = document.querySelector(".start");
   startButton.addEventListener("click", () => {
-    game = Game();
+    game.start();
   })
 
   const cells = document.querySelectorAll(".cell");
